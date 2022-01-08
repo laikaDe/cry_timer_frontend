@@ -13,12 +13,27 @@ function submitTimer(e){
     p.innerText = timerInput.value
 
     const reviewForm = document.createElement('form')
-    reviewForm.innerHTML += `<input type="text"><input
-    type="submit">`
+    reviewForm.innerHTML += `<input type="text" 
+    id="review-input"><input type="submit">`
 
-    li.append(p, reviewForm)
+    reviewForm.addEventListener("submit", submitReview)
+
+    const reviewList = document.createElement('ul')
+
+    li.append(p, reviewForm, reviewList)
 
     timerList.appendChild(li)
 
     timerForm.reset()
+}
+
+function submitReview(e){
+    e.preventDefault()
+    const reviewInput = e.target.children[0].value 
+    const reviewList = e.target.nextElementSibling
+
+    const li = document.createElement('li')
+
+    li.innerText = reviewInput
+    console.log(e.target.nextElementSibling)
 }
