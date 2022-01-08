@@ -35,5 +35,4 @@ function submitReview(e){
     const li = document.createElement('li')
 
     li.innerText = reviewInput
-    console.log(e.target.nextElementSibling)
-}
+    reviewList.appendChild(li)}
