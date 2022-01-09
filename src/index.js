@@ -1,10 +1,30 @@
 const timerForm = document.getElementById("timer-form")
 const timerInput = document.getElementById("timer-input")
 const timerList = document.getElementById("timer-list")
+const timerURL = `http://localhost:3000/timers`
 
 timerForm.addEventListener("submit", submitTimer)
+timerForm.addEventListener("submit", renderTimer)
+
 
 function submitTimer(e){
+    e.preventDefault() 
+    console.log(e.target.children[0].value)
+    const configObj = {
+        method: "POST",
+        headers: {
+            "Content-type":"application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            content: timerInput.value
+        })   
+    }
+    fetch(timerURL, configObj)
+}
+
+// render timer to dom
+function renderTimer(e){
     e.preventDefault() 
     console.log(e.target.children[0].value)
     const li = document.createElement('li')
@@ -35,4 +55,7 @@ function submitReview(e){
     const li = document.createElement('li')
 
     li.innerText = reviewInput
-    reviewList.appendChild(li)}
+    reviewList.appendChild(li)
+
+    e.target.reset()
+}
