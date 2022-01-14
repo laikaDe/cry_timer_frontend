@@ -1,5 +1,7 @@
 const timerForm = document.getElementById("timer-form")
 const timerInput = document.getElementById("timer-input")
+const timerDescriptionInput = document.getElementById("timer-description-input")
+const timerDateTimeInput = document.getElementById("timer-datetime-input")
 const timerList = document.getElementById("timer-list")
 const timerURL = `http://localhost:3000/timers`
 
@@ -13,11 +15,13 @@ function submitTimer(e){
     const configObj = {
         method: "POST",
         headers: {
-            "Content-type":"application/json",
+            "Content-type": "application/json",
             "Accept": "application/json"
         },
         body: JSON.stringify({
-            content: timerInput.value
+            span: timerInput.value,
+            description: timerDescriptionInput.value,
+            datetime: timerDateTimeInput.value
         })   
     }
     fetch(timerURL, configObj)
