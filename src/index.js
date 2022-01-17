@@ -9,17 +9,14 @@ const reviewURL = `http://localhost:3000/reviews`
 function fetchTimers() {
     fetch(timerURL)
     .then(res => res.json())
-    .then(posts => posts.forEach(timer => renderTimer(timer.description, timer.datetime)))
-
+    .then(timers => timers.forEach(renderTimer))
 }
 
 timerForm.addEventListener("submit", submitTimer)
-timerForm.addEventListener("submit", renderTimer)
 
 
-function submitTimer(e){
-    e.preventDefault() 
-    console.log(e.target.children[0].value)
+function submitTimer(event){
+    event.preventDefault() 
     const configObj = {
         method: "POST",
         headers: {
@@ -33,18 +30,24 @@ function submitTimer(e){
         })   
     }
     fetch(timerURL, configObj)
-  
-    renderTimer(timerInput.value)
+    .then(res => res.json())
+    .then(renderTimer)
 }
 
 // render timer to dom
 function renderTimer(timer){
- 
     const li = document.createElement('li')
-    li.dataset
+    li.dataset.id = timer.id
 
-    const p = document.createElement('p')
-    p.innerText = timer
+    const p1 = document.createElement('p')
+    p1.innerText = timer.span
+
+    const p2 = document.createElement('p')
+    p2.innerText = timer.description
+
+    const p3 = document.createElement('p')
+    p3.innerText = timer.datetime
+
 
     const reviewForm = document.createElement('form')
     reviewForm.innerHTML += `<input type="text" 
@@ -54,7 +57,7 @@ function renderTimer(timer){
 
     const reviewList = document.createElement('ul')
 
-    li.append(p, reviewForm, reviewList)
+    li.append(p1, p2, p3, reviewForm, reviewList)
 
     timerList.appendChild(li)
 
@@ -63,7 +66,7 @@ function renderTimer(timer){
 
 function renderReview(e){
     e.preventDefault()
-
+    console.log(e.target)
     const reviewInput = e.target.children[0].value 
     const reviewList = e.target.nextElementSibling
 
@@ -72,7 +75,7 @@ function renderReview(e){
     li.innerText = reviewInput
     reviewList.appendChild(li)
 
-    submitReview(reviewInput)
+    // submitReview(reviewInput)
 
     e.target.reset()
     
