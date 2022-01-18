@@ -66,22 +66,23 @@ function renderTimer(timer){
 
 function renderReview(e){
     e.preventDefault()
-    console.log(e.target)
+
     const reviewInput = e.target.children[0].value 
     const reviewList = e.target.nextElementSibling
+    const timerId = e.target.parentElement.dataset.id
 
     const li = document.createElement('li')
-
     li.innerText = reviewInput
     reviewList.appendChild(li)
 
-    // submitReview(reviewInput)
+
+    submitReview(reviewInput, timerId)
 
     e.target.reset()
     
 }
 
-function submitReview(review){
+function submitReview(review, timerId){
     fetch(reviewURL, {
         method: "POST",
         headers: {
@@ -89,7 +90,8 @@ function submitReview(review){
             "Accept": "application/json"
         },
         body: JSON.stringify({
-            comment: review.comment
+            comment: review.comment,
+            timer_id: timerId
         })
     })
 }
