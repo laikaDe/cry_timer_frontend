@@ -88,6 +88,17 @@ function renderReview(e){
     
 }
 
+function createReview(reviewInput, reviewList, timerId){
+    const li = document.createElement('li')
+    li.dataset.id = timerId
+    li.innerText = reviewInput 
+
+    const deleteBtn = document.createElement('button')
+    deleteBtn.innerText = "X"
+    li.appendChild(deleteBtn)
+    reviewList.appendChild(li)
+}
+
 
 function submitReview(review, timerId){
     fetch(reviewURL, {

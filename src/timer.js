@@ -1,19 +1,22 @@
 class Timer {
 
 
+    static allTimers = []
+
+
     constructor(timer){
         this.id = timer.id
         this.span = timer.attributes.span
         this.description = timer.attributes.desription
         this.datetime = timer.attributes.datetime
         this.reviews = timer.attributes.reviews
-        console.log(this)
+        Timer.allTimers.push(this)
     }
 
 
     static renderTimers(){
-        for(let timer of timers){
-            renderTimer(timer)
+        for(let timer of this.allTimers){
+            timer.renderTimer(timer)
         }
     }
     
@@ -24,22 +27,22 @@ class Timer {
             for(let timer of timers){
                 let newList = new Timer(timer.data)
             }
+            this.renderTimers()
         })
     }
 
-    renderTimer(timer){
-        console.log(timer)
+    renderTimer(){
         const li = document.createElement('li')
-        li.dataset.id = timer.id
+        li.dataset.id = this.id
 
         const p1 = document.createElement('p')
-        p1.innerText = timer.attributes.span
+        p1.innerText = this.span
 
         const p2 = document.createElement('p')
-        p2.innerText = timer.attributes.description
+        p2.innerText = this.description
 
         const p3 = document.createElement('p')
-        p3.innerText = timer.attributes.datetime
+        p3.innerText = this.datetime
 
 
         const reviewForm = document.createElement('form')
@@ -49,10 +52,8 @@ class Timer {
         reviewForm.addEventListener("submit", renderReview)
 
         const reviewList = document.createElement('ul')
-        timer.attributes.reviews.forEach(review => {
-            const reviewLi = document.createElement('li')
-            reviewLi.innerText = review.comment
-            timerList.appendChild(reviewLi)
+        this.reviews.forEach(review => {
+            createReview(review.comment, reviewList, this.id)
         })
 
         li.append(p1, p2, p3, reviewForm, reviewList)
