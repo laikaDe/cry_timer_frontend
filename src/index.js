@@ -6,11 +6,11 @@ const timerList = document.getElementById("timer-list")
 const timerURL = `http://localhost:3000/timers`
 const reviewURL = `http://localhost:3000/reviews`
 
-function fetchTimers() {
-    fetch(timerURL)
-    .then(res => res.json())
-    .then(timers => timers.forEach(renderTimer))
-}
+// function fetchTimers() {
+//     fetch(timerURL)
+//     .then(res => res.json())
+//     .then(timers => timers.forEach(data => renderTimer(data.data)))
+// }
 
 timerForm.addEventListener("submit", submitTimer)
 
@@ -31,47 +31,53 @@ function submitTimer(event){
     }
     fetch(timerURL, configObj)
     .then(res => res.json())
-    .then(renderTimer)
+    .then(data => renderTimer(data.data))
 }
 
 // render timer to dom
-function renderTimer(timer){
-    const li = document.createElement('li')
-    li.dataset.id = timer.id
+// function renderTimer(timer){
+//     console.log(timer)
+//     const li = document.createElement('li')
+//     li.dataset.id = timer.id
 
-    const p1 = document.createElement('p')
-    p1.innerText = timer.span
+//     const p1 = document.createElement('p')
+//     p1.innerText = timer.attributes.span
 
-    const p2 = document.createElement('p')
-    p2.innerText = timer.description
+//     const p2 = document.createElement('p')
+//     p2.innerText = timer.attributes.description
 
-    const p3 = document.createElement('p')
-    p3.innerText = timer.datetime
+//     const p3 = document.createElement('p')
+//     p3.innerText = timer.attributes.datetime
 
 
-    const reviewForm = document.createElement('form')
-    reviewForm.innerHTML += `<input type="text" 
-    id="review-input"><input type="submit">`
+//     const reviewForm = document.createElement('form')
+//     reviewForm.innerHTML += `<input type="text" 
+//     id="review-input"><input type="submit">`
 
-    reviewForm.addEventListener("submit", renderReview)
+//     reviewForm.addEventListener("submit", renderReview)
 
-    const reviewList = document.createElement('ul')
+//     const reviewList = document.createElement('ul')
+//     timer.attributes.reviews.forEach(review => {
+//         const reviewLi = document.createElement('li')
+//         reviewLi.innerText = review.comment
+//         timerList.appendChild(reviewLi)
+//     })
 
-    li.append(p1, p2, p3, reviewForm, reviewList)
+//     li.append(p1, p2, p3, reviewForm, reviewList)
 
-    timerList.appendChild(li)
+//     timerList.appendChild(li)
 
-    timerForm.reset()
-}
+//     timerForm.reset()
+// }
 
 function renderReview(e){
     e.preventDefault()
-
     const reviewInput = e.target.children[0].value 
     const reviewList = e.target.nextElementSibling
     const timerId = e.target.parentElement.dataset.id
 
     const li = document.createElement('li')
+    li.dataset.id = timerId
     li.innerText = reviewInput
     reviewList.appendChild(li)
 
@@ -82,6 +88,7 @@ function renderReview(e){
     
 }
 
+
 function submitReview(review, timerId){
     fetch(reviewURL, {
         method: "POST",
@@ -90,7 +97,7 @@ function submitReview(review, timerId){
             "Accept": "application/json"
         },
         body: JSON.stringify({
-            comment: review.comment,
+            comment: review,
             timer_id: timerId
         })
     })
