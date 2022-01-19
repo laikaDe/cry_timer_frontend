@@ -2,6 +2,12 @@ class Timer {
 
 
     constructor(timer){
+        this.id = timer.id
+        this.span = timer.attributes.span
+        this.description = timer.attributes.desription
+        this.datetime = timer.attributes.datetime
+        this.reviews = timer.attributes.reviews
+        console.log(this)
     }
 
 
