@@ -7,7 +7,7 @@ class Timer {
     constructor(timer){
         this.id = timer.id
         this.span = timer.attributes.span
-        this.description = timer.attributes.desription
+        this.description = timer.attributes.description
         this.datetime = timer.attributes.datetime
         this.reviews = timer.attributes.reviews
         Timer.allTimers.push(this)
@@ -63,4 +63,25 @@ class Timer {
         timerForm.reset()
     }
 
+    static submitTimer(e){
+        e.preventDefault() 
+        const configObj = {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                span: timerInput.value,
+                description: timerDescriptionInput.value,
+                datetime: timerDateTimeInput.value
+            })   
+    }
+    fetch(timerURL, configObj)
+    .then(res => res.json())
+    .then(data => {
+        let newTimer = new Timer(data.data)
+        newTimer.renderTimer()
+    })
+}
 }
