@@ -1,19 +1,26 @@
 class Timer {
 
+
+    constructor(timer){
+    }
+
+
     static renderTimers(){
         for(let timer of timers){
             renderTimer(timer)
         }
-
     }
     
     static fetchTimers(){
         fetch(timerURL)
         .then(res => res.json())
-        .then(renderTimers)
+        .then(timers => {
+            for(let timer of timers){
+                let newList = new Timer(timer.data)
+            }
+        })
     }
 
-    // render timer to dom
     renderTimer(timer){
         console.log(timer)
         const li = document.createElement('li')

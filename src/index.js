@@ -103,4 +103,4 @@ function submitReview(review, timerId){
     })
 }
 
-fetchTimers()
+Timer.fetchTimers()
