@@ -1,7 +1,7 @@
 class Review {
 
     constructor(review) {
-        this.timer_id = review.timer_id
+        this.timer_id = review.mood_id
         this.comment = review.comment
         this.id = review.id
     }
@@ -10,9 +10,9 @@ class Review {
         e.preventDefault()
         const reviewInput = e.target.children[0].value 
         const reviewList = e.target.nextElementSibling
-        const timerId = e.target.parentElement.dataset.id
+        const moodId = e.target.parentElement.dataset.id
     
-        Review.submitReview(reviewInput, reviewList, timerId)
+        Review.submitReview(reviewInput, reviewList, moodId)
     
         e.target.reset()
         
@@ -20,7 +20,7 @@ class Review {
     
     renderReview(reviewList){
         const li = document.createElement('li')
-        li.dataset.id = this.timer_id
+        li.dataset.id = this.mood_id
         li.innerText = this.comment
     
         // const deleteBtn = document.createElement('button')
@@ -30,7 +30,7 @@ class Review {
     }
     
     
-    static submitReview(review, reviewList, timerId){
+    static submitReview(review, reviewList, moodId){
         fetch(reviewURL, {
             method: "POST",
             headers: {
@@ -39,7 +39,7 @@ class Review {
             },
             body: JSON.stringify({
                 comment: review,
-                timer_id: timerId
+                mood_id: moodId
             })  
         }).then(res => res.json())
         .then(review => {

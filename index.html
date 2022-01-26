@@ -9,26 +9,68 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>Document</title>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>One Page Website</title>
+        <link rel="stylesheet" href="style.css">
     </head>
-<header>
-<h1>Moody</h1>
-</header>
-<body>
+    
+    <body>
+    
+        <section id="home">
+            <header>
+                <ul id="menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About </a></li>
+                    <li><a href="#mood-form">New Entry</a></li>
+                    <li><a href="#journals">Journals</a></li>
+                    
 
-    <div id="container">
+                </ul>
+            </header>
+             <h1>My Mood Tracker</h1>
+        </section>
+        <section id="about"><h1>"Everyday brings it's highs and lows. Everything in life comes in waves. Track your daily mood and become more aware of when and how you're feeling a certain way." </h1></section>
+        <section id="container">
+            <form id="mood-form" method="post">
+                <ul id="mood-list">
+                 <li>
+                   <label for="mood-description-input">Describe your Mood:</label>
+                   <input type="text" id="mood-description-input"required>
+                 </li>
+                 <li>
+                   <label for="mood-datetime-input">Date & Time:</label>
+                   <input type="datetime-local" id="mood-datetime-input" required>
+                 <li class="button">
+                    <button type="submit">Done</button>
+                  </li>
+                 </li>
+            
+                </ul>
+               </form>
         
-        <form id="timer-form">
-            <p>Description: <input type="text" id="mood-description-input"></p>
-            <p>Date & Time: <input type="datetime-local" id="mood-datetime-input"></p>
-            <p><input type="submit"></p>
-        </form>
-        <ul id="mood-list">
-
-        </ul>
-    </div> 
-    <script src="./src/review.js"></script>
+            
+        </div> 
+        <section id="journals"><h1>How are you feeling? Log your mood!</h1></section>
+     
+    </body>
+ 
+    
+    <script src="./src/review.js"></script> 
     <script src="./src/mood.js"></script>
     <script src="./src/index.js"></script>
  
 </body>
-</html>
+</html> -->
+
+<!-- <form id="mood-form">
+    <p>Description: <input type="text" id="mood-description-input"required></p>
+    <p>Date & Time: <input type="datetime-local" id="mood-datetime-input" required></p>
+    <button class="mood-button" type="submit">
+        <i class="fa-solid fa-square-plus"></i>           
+    </button>
+</form>
+
+
+</ul> -->

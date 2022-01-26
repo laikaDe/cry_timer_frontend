@@ -1,12 +1,16 @@
-const timerForm = document.getElementById("timer-form")
-const timerInput = document.getElementById("timer-input")
-const timerDescriptionInput = document.getElementById("timer-description-input")
-const timerDateTimeInput = document.getElementById("timer-datetime-input")
-const timerList = document.getElementById("timer-list")
-const timerURL = `http://localhost:3000/timers`
+//Selectors
+
+const moodForm = document.getElementById("mood-form")
+const moodInput = document.getElementById("mood-input")
+const moodDescriptionInput = document.getElementById("mood-description-input")
+const moodDateTimeInput = document.getElementById("mood-datetime-input")
+const moodList = document.getElementById("mood-list")
+const moodURL = `http://localhost:3000/moods`
 const reviewURL = `http://localhost:3000/reviews`
 
+//EventListeners
+moodForm.addEventListener("submit", Mood.submitMood)
 
-timerForm.addEventListener("submit", Timer.submitTimer)
 
-Timer.fetchTimers()
+//Functions
+Mood.fetchMoods()

@@ -6,7 +6,6 @@ class Mood {
 
     constructor(mood){
         this.id = mood.id
-        this.span = mood.attributes.span
         this.description = mood.attributes.description
         this.datetime = mood.attributes.datetime
         this.reviews = mood.attributes.reviews
@@ -36,10 +35,10 @@ class Mood {
         li.dataset.id = this.id
 
         const p1 = document.createElement('p')
-        p2.innerText = this.description
+        p1.innerText = this.description
 
         const p2 = document.createElement('p')
-        p3.innerText = this.datetime
+        p2.innerText = this.datetime
 
         // const deleteBtn = document.createElement('button')
         // deleteBtn.innerText = "delete"
